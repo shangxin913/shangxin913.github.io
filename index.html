@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TikTok Daily Account Monitor</title>
+  <title>TikTok 每日账号监控</title>
   <style>
-    :root{--bg:#f6f7f9;--panel:#fff;--text:#1d2430;--muted:#667085;--line:#dde3ea;--accent:#0f766e;--accent-soft:#d9f3ef;--warn:#9a3412;--warn-soft:#ffedd5;--empty:#475467;font-family:Segoe UI,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}.shell{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 48px}header{margin-bottom:24px}h1{margin:0 0 8px;font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:0}.subtitle{margin:0;color:var(--muted);font-size:15px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.metric,.accounts,.log{border:1px solid var(--line);border-radius:8px;background:var(--panel)}.metric{padding:16px}.metric span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}.metric strong{display:block;font-size:24px;line-height:1.2}.accounts{display:flex;flex-wrap:wrap;gap:8px;padding:12px;margin-bottom:18px}.account-link{display:inline-flex;align-items:center;min-height:34px;padding:0 11px;border:1px solid var(--line);border-radius:8px;color:var(--text);text-decoration:none;background:#fbfcfd;font-size:14px}.log{overflow:hidden}.log-header,.entry{display:grid;grid-template-columns:160px 170px 110px 1fr 180px;gap:14px;align-items:start;padding:14px 16px}.log-header{background:#eef2f6;color:var(--muted);font-size:13px;font-weight:600}.entry{border-top:1px solid var(--line)}.status{display:inline-flex;align-items:center;width:fit-content;min-height:26px;padding:0 9px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}.status.new{background:var(--accent-soft);color:var(--accent)}.status.none{background:#eef2f6;color:var(--empty)}.status.issue{background:var(--warn-soft);color:var(--warn)}.handle,.caption{margin:0 0 5px;font-weight:600;line-height:1.35;overflow-wrap:anywhere}.videos{display:grid;gap:10px}.video{padding-bottom:10px;border-bottom:1px dashed var(--line)}.video:last-child{padding-bottom:0;border-bottom:0}.meta,.notes{margin:0;color:var(--muted);font-size:13px;line-height:1.45;overflow-wrap:anywhere}.video a,.meta a{color:var(--accent);text-decoration:none}.empty-state{padding:32px 18px;text-align:center;color:var(--muted);border-top:1px solid var(--line)}@media(max-width:980px){.summary{grid-template-columns:1fr 1fr}.log-header{display:none}.entry{grid-template-columns:1fr;gap:9px;padding:16px}.entry>div:before{display:block;margin-bottom:4px;color:var(--muted);font-size:12px;font-weight:700}.entry>div:nth-child(1):before{content:"Checked"}.entry>div:nth-child(2):before{content:"Account"}.entry>div:nth-child(3):before{content:"Status"}.entry>div:nth-child(4):before{content:"Videos"}.entry>div:nth-child(5):before{content:"Notes"}}@media(max-width:620px){.summary{grid-template-columns:1fr}}
+    :root{--bg:#f6f7f9;--panel:#fff;--text:#1d2430;--muted:#667085;--line:#dde3ea;--accent:#0f766e;--accent-soft:#d9f3ef;--warn:#9a3412;--warn-soft:#ffedd5;--empty:#475467;font-family:Segoe UI,Microsoft YaHei,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}.shell{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 48px}header{margin-bottom:24px}h1{margin:0 0 8px;font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:0}.subtitle{margin:0;color:var(--muted);font-size:15px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.metric,.accounts,.log{border:1px solid var(--line);border-radius:8px;background:var(--panel)}.metric{padding:16px}.metric span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}.metric strong{display:block;font-size:24px;line-height:1.2}.accounts{display:flex;flex-wrap:wrap;gap:8px;padding:12px;margin-bottom:18px}.account-link{display:inline-flex;align-items:center;min-height:34px;padding:0 11px;border:1px solid var(--line);border-radius:8px;color:var(--text);text-decoration:none;background:#fbfcfd;font-size:14px}.log{overflow:hidden}.log-header,.entry{display:grid;grid-template-columns:160px 170px 110px 1fr 180px;gap:14px;align-items:start;padding:14px 16px}.log-header{background:#eef2f6;color:var(--muted);font-size:13px;font-weight:600}.entry{border-top:1px solid var(--line)}.status{display:inline-flex;align-items:center;width:fit-content;min-height:26px;padding:0 9px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}.status.new{background:var(--accent-soft);color:var(--accent)}.status.none{background:#eef2f6;color:var(--empty)}.status.issue{background:var(--warn-soft);color:var(--warn)}.handle,.caption{margin:0 0 5px;font-weight:600;line-height:1.35;overflow-wrap:anywhere}.videos{display:grid;gap:10px}.video{padding-bottom:10px;border-bottom:1px dashed var(--line)}.video:last-child{padding-bottom:0;border-bottom:0}.meta,.notes{margin:0;color:var(--muted);font-size:13px;line-height:1.45;overflow-wrap:anywhere}.video a,.meta a{color:var(--accent);text-decoration:none}.empty-state{padding:32px 18px;text-align:center;color:var(--muted);border-top:1px solid var(--line)}@media(max-width:980px){.summary{grid-template-columns:1fr 1fr}.log-header{display:none}.entry{grid-template-columns:1fr;gap:9px;padding:16px}.entry>div:before{display:block;margin-bottom:4px;color:var(--muted);font-size:12px;font-weight:700}.entry>div:nth-child(1):before{content:"检查时间"}.entry>div:nth-child(2):before{content:"账号"}.entry>div:nth-child(3):before{content:"状态"}.entry>div:nth-child(4):before{content:"视频"}.entry>div:nth-child(5):before{content:"备注"}}@media(max-width:620px){.summary{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <main class="shell">
     <header>
-      <h1>TikTok Daily Account Monitor</h1>
-      <p class="subtitle">Runs daily at 06:00 Beijing time and records new videos for each tracked account.</p>
+      <h1>TikTok 每日账号监控</h1>
+      <p class="subtitle">每天北京时间 09:00 检查账号新视频，并记录到这个页面。</p>
     </header>
-    <section class="summary" aria-label="Monitor summary">
-      <div class="metric"><span>Last check</span><strong id="last-check">None</strong></div>
-      <div class="metric"><span>Tracked accounts</span><strong id="total-accounts">0</strong></div>
-      <div class="metric"><span>Total new videos</span><strong id="total-videos">0</strong></div>
-      <div class="metric"><span>Check records</span><strong id="total-records">0</strong></div>
+    <section class="summary" aria-label="监控摘要">
+      <div class="metric"><span>最近检查</span><strong id="last-check">暂无</strong></div>
+      <div class="metric"><span>监控账号</span><strong id="total-accounts">0</strong></div>
+      <div class="metric"><span>累计新视频</span><strong id="total-videos">0</strong></div>
+      <div class="metric"><span>检查记录</span><strong id="total-records">0</strong></div>
     </section>
-    <nav class="accounts" id="accounts" aria-label="Tracked TikTok accounts"></nav>
-    <section class="log" aria-label="Daily check records">
-      <div class="log-header"><div>Checked</div><div>Account</div><div>Status</div><div>Videos</div><div>Notes</div></div>
+    <nav class="accounts" id="accounts" aria-label="监控的 TikTok 账号"></nav>
+    <section class="log" aria-label="每日检查记录">
+      <div class="log-header"><div>检查时间</div><div>账号</div><div>状态</div><div>视频</div><div>备注</div></div>
       <div id="entries"></div>
     </section>
   </main>
@@ -46,16 +46,16 @@
     const accounts=Array.isArray(window.MONITOR_ACCOUNTS)?window.MONITOR_ACCOUNTS:[];
     const entries=Array.isArray(window.MONITOR_ENTRIES)?window.MONITOR_ENTRIES:[];
     const esc=(value)=>String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-    const statusLabel=(entry)=>entry.issue?"Access issue":(entry.newVideos||[]).length>0?"New videos":"No new posts";
+    const statusLabel=(entry)=>entry.issue?"访问异常":(entry.newVideos||[]).length>0?"有新视频":"无新增";
     const statusClass=(entry)=>entry.issue?"issue":(entry.newVideos||[]).length>0?"new":"none";
-    const renderVideos=(videos)=>!videos||videos.length===0?'<p class="meta">No new videos detected.</p>':`<div class="videos">${videos.map((video)=>`<div class="video"><p class="caption">${esc(video.caption||"No visible caption")}</p><p class="meta">${esc(video.publishedAt||"Publish time not visible")}</p>${video.url?`<p class="meta"><a href="${esc(video.url)}" target="_blank" rel="noreferrer">Open video</a></p>`:""}</div>`).join("")}</div>`;
+    const renderVideos=(videos)=>!videos||videos.length===0?'<p class="meta">未发现新视频。</p>':`<div class="videos">${videos.map((video)=>`<div class="video"><p class="caption">${esc(video.caption||"未显示文案")}</p><p class="meta">${esc(video.publishedAt||"未显示发布时间")}</p>${video.url?`<p class="meta"><a href="${esc(video.url)}" target="_blank" rel="noreferrer">打开视频</a></p>`:""}</div>`).join("")}</div>`;
     const sorted=[...entries].sort((a,b)=>String(b.checkedAt||"").localeCompare(String(a.checkedAt||"")));
     document.querySelector("#accounts").innerHTML=accounts.map((account)=>`<a class="account-link" href="${esc(account.url)}" target="_blank" rel="noreferrer">${esc(account.handle)}</a>`).join("");
-    document.querySelector("#last-check").textContent=sorted[0]?.checkedAt||"None";
+    document.querySelector("#last-check").textContent=sorted[0]?.checkedAt||"暂无";
     document.querySelector("#total-accounts").textContent=String(accounts.length);
     document.querySelector("#total-videos").textContent=String(entries.reduce((sum,entry)=>sum+((entry.newVideos||[]).length),0));
     document.querySelector("#total-records").textContent=String(entries.length);
-    document.querySelector("#entries").innerHTML=sorted.length===0?'<div class="empty-state">The first automation run will add daily records here.</div>':sorted.map((entry)=>`<article class="entry"><div>${esc(entry.checkedAt||"Unknown")}</div><div><p class="handle">${esc(entry.handle||"Unknown account")}</p>${entry.accountUrl?`<p class="meta"><a href="${esc(entry.accountUrl)}" target="_blank" rel="noreferrer">Open account</a></p>`:""}</div><div><span class="status ${statusClass(entry)}">${statusLabel(entry)}</span></div><div>${renderVideos(entry.newVideos||[])}</div><div class="notes">${esc(entry.notes||"")}</div></article>`).join("");
+    document.querySelector("#entries").innerHTML=sorted.length===0?'<div class="empty-state">自动化完成第一次检查后，这里会出现每日记录。</div>':sorted.map((entry)=>`<article class="entry"><div>${esc(entry.checkedAt||"未知")}</div><div><p class="handle">${esc(entry.handle||"未知账号")}</p>${entry.accountUrl?`<p class="meta"><a href="${esc(entry.accountUrl)}" target="_blank" rel="noreferrer">打开账号</a></p>`:""}</div><div><span class="status ${statusClass(entry)}">${statusLabel(entry)}</span></div><div>${renderVideos(entry.newVideos||[])}</div><div class="notes">${esc(entry.notes||"")}</div></article>`).join("");
   </script>
 </body>
 </html>

@@ -130,7 +130,7 @@ footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-
 <script>
 const OWNER = 'shangxin913';
 const REPO = 'shangxin913.github.io';
-const GH_TOKEN = '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';
+const GH_TOKEN = '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';
 
 function showToast(msg, duration=3000){
   const t=document.getElementById('toast');
@@ -211,29 +211,42 @@ async function loadData(){
   document.getElementById('footer-time').textContent = '加载于 '+new Date().toLocaleString('zh-CN');
 }
 
-async function triggerWorkflow(inputs){
-  const token = getToken();
-  if(!token) return showToast('❌ 需要 GitHub Token 才能操作');
-  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/daily_check.yml/dispatches`,{
-    method:'POST',
-    headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
-    body: JSON.stringify({ref:'main', inputs})
+const API = 'https://api.github.com/repos/' + OWNER + '/' + REPO;
+const ACCOUNTS_PATH = 'data/accounts.json';
+
+async function getFileSha() {
+  const r = await fetch(API + '/contents/' + ACCOUNTS_PATH, {
+    headers: {'Authorization': 'token ' + GH_TOKEN, 'Accept': 'application/vnd.github.v3+json'}
   });
-  return res.status === 204;
+  const d = await r.json();
+  return {sha: d.sha, content: JSON.parse(atob(d.content.replace(/\n/g,'')))};
+}
+
+async function saveAccounts(accounts, sha) {
+  const body = JSON.stringify({accounts});
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify({accounts}, null, 2) + '\n')));
+  const r = await fetch(API + '/contents/' + ACCOUNTS_PATH, {
+    method: 'PUT',
+    headers: {'Authorization': 'token ' + GH_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json'},
+    body: JSON.stringify({message: '📝 更新账号列表', content: encoded, sha})
+  });
+  return r.status === 200 || r.status === 201;
 }
 
 async function addAccount(){
   const input = document.getElementById('new-acc');
   const username = input.value.trim().replace(/^@/,'');
   if(!username) return showToast('请输入账号名');
-  showToast('⏳ 正在提交…');
-  const ok = await triggerWorkflow({action:'add_account', account: username});
-  if(ok){
-    input.value='';
-    showToast('✅ 已提交！GitHub Actions 将在1分钟内添加 @'+username+'，之后刷新页面即可看到', 4000);
-  } else {
-    showToast('❌ 提交失败，请检查 Token 是否有效');
-  }
+  showToast('⏳ 正在保存…');
+  try {
+    const {sha, content} = await getFileSha();
+    const accounts = content.accounts || [];
+    if(accounts.includes(username)) return showToast('❌ 账号已存在');
+    accounts.push(username);
+    const ok = await saveAccounts(accounts, sha);
+    if(ok){ input.value=''; showToast('✅ 已添加 @'+username+'！刷新页面即可看到', 3000); }
+    else showToast('❌ 保存失败');
+  } catch(e) { showToast('❌ 错误：'+e.message); }
 }
 
 async function removeAccount(){
@@ -241,14 +254,14 @@ async function removeAccount(){
   const username = input.value.trim().replace(/^@/,'');
   if(!username) return showToast('请输入要删除的账号名');
   if(!confirm('确定删除 @'+username+' ？')) return;
-  showToast('⏳ 正在提交…');
-  const ok = await triggerWorkflow({action:'remove_account', account: username});
-  if(ok){
-    input.value='';
-    showToast('✅ 已提交！GitHub Actions 将在1分钟内删除 @'+username, 4000);
-  } else {
-    showToast('❌ 提交失败，请检查 Token 是否有效');
-  }
+  showToast('⏳ 正在保存…');
+  try {
+    const {sha, content} = await getFileSha();
+    const accounts = (content.accounts || []).filter(a => a !== username);
+    const ok = await saveAccounts(accounts, sha);
+    if(ok){ input.value=''; showToast('✅ 已删除 @'+username+'！刷新页面即可看到', 3000); }
+    else showToast('❌ 保存失败');
+  } catch(e) { showToast('❌ 错误：'+e.message); }
 }
 
 document.getElementById('new-acc').addEventListener('keydown',e=>{if(e.key==='Enter')addAccount()});

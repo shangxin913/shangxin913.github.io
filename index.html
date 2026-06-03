@@ -87,14 +87,11 @@ footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-
   </div>
 </header>
 
-<!-- 添加账号 -->
+<!-- 账号管理 -->
 <div class="add-bar">
-  <span class="add-bar-label">添加账号</span>
-  <input id="new-acc" type="text" placeholder="输入 TikTok 用户名（不含 @）" />
-  <button class="btn btn-add" onclick="addAccount()">＋ 添加</button>
-  <span class="add-bar-label" style="margin-left:8px">删除账号</span>
-  <input id="del-acc" type="text" placeholder="输入要删除的用户名" />
-  <button class="btn btn-del" onclick="removeAccount()">－ 删除</button>
+  <span class="add-bar-label">账号管理</span>
+  <button class="btn btn-add" onclick="window.open('https://github.com/shangxin913/shangxin913.github.io/edit/main/data/accounts.json','_blank')">✏️ 添加 / 删除账号</button>
+  <span style="font-size:12px;color:var(--muted);margin-left:8px">点击在 GitHub 上直接编辑账号列表，保存后刷新页面即可</span>
 </div>
 
 <!-- Stats -->
@@ -211,61 +208,9 @@ async function loadData(){
   document.getElementById('footer-time').textContent = '加载于 '+new Date().toLocaleString('zh-CN');
 }
 
-const API = 'https://api.github.com/repos/' + OWNER + '/' + REPO;
-const ACCOUNTS_PATH = 'data/accounts.json';
 
-async function getFileSha() {
-  const r = await fetch(API + '/contents/' + ACCOUNTS_PATH, {
-    headers: {'Authorization': 'token ' + GH_TOKEN, 'Accept': 'application/vnd.github.v3+json'}
-  });
-  const d = await r.json();
-  return {sha: d.sha, content: JSON.parse(atob(d.content.replace(/\n/g,'')))};
-}
 
-async function saveAccounts(accounts, sha) {
-  const body = JSON.stringify({accounts});
-  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify({accounts}, null, 2) + '\n')));
-  const r = await fetch(API + '/contents/' + ACCOUNTS_PATH, {
-    method: 'PUT',
-    headers: {'Authorization': 'token ' + GH_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json'},
-    body: JSON.stringify({message: '📝 更新账号列表', content: encoded, sha})
-  });
-  return r.status === 200 || r.status === 201;
-}
 
-async function addAccount(){
-  const input = document.getElementById('new-acc');
-  const username = input.value.trim().replace(/^@/,'');
-  if(!username) return showToast('请输入账号名');
-  showToast('⏳ 正在保存…');
-  try {
-    const {sha, content} = await getFileSha();
-    const accounts = content.accounts || [];
-    if(accounts.includes(username)) return showToast('❌ 账号已存在');
-    accounts.push(username);
-    const ok = await saveAccounts(accounts, sha);
-    if(ok){ input.value=''; showToast('✅ 已添加 @'+username+'！刷新页面即可看到', 3000); }
-    else showToast('❌ 保存失败');
-  } catch(e) { showToast('❌ 错误：'+e.message); }
-}
-
-async function removeAccount(){
-  const input = document.getElementById('del-acc');
-  const username = input.value.trim().replace(/^@/,'');
-  if(!username) return showToast('请输入要删除的账号名');
-  if(!confirm('确定删除 @'+username+' ？')) return;
-  showToast('⏳ 正在保存…');
-  try {
-    const {sha, content} = await getFileSha();
-    const accounts = (content.accounts || []).filter(a => a !== username);
-    const ok = await saveAccounts(accounts, sha);
-    if(ok){ input.value=''; showToast('✅ 已删除 @'+username+'！刷新页面即可看到', 3000); }
-    else showToast('❌ 保存失败');
-  } catch(e) { showToast('❌ 错误：'+e.message); }
-}
-
-document.getElementById('new-acc').addEventListener('keydown',e=>{if(e.key==='Enter')addAccount()});
-document.getElementById('del-acc').addEventListener('keydown',e=>{if(e.key==='Enter')removeAccount()});
 
 loadData();
 </script>

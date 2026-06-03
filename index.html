@@ -193,7 +193,7 @@ async function loadData(){
       wg.innerHTML='<div style="color:var(--muted);font-size:13px">本周暂无新视频数据</div>';
     } else {
       wg.innerHTML = accounts.map(a=>`
-        <div class="weekly-card">
+        <div class="weekly-card" onclick="window.open('https://www.tiktok.com/@${a}','_blank')" style="cursor:pointer">
           <div class="name">@${a}</div>
           <div class="count">${weekly[a]||0}</div>
           <div class="label">本周新视频</div>

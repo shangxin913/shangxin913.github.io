@@ -130,7 +130,7 @@ footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-
 <script>
 const OWNER = 'shangxin913';
 const REPO = 'shangxin913.github.io';
-const TOKEN_KEY = 'gh_monitor_token';
+const GH_TOKEN = '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';
 
 function showToast(msg, duration=3000){
   const t=document.getElementById('toast');
@@ -138,7 +138,7 @@ function showToast(msg, duration=3000){
   setTimeout(()=>t.classList.remove('show'),duration);
 }
 
-function getToken(){
+function getToken(){ return GH_TOKEN; //
   let t = localStorage.getItem(TOKEN_KEY);
   if(!t){
     t = prompt('请输入 GitHub Token（仅用于添加/删除账号，保存在本地）：');

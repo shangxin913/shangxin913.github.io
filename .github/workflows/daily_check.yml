@@ -4,6 +4,14 @@ on:
   schedule:
     - cron: '0 1 * * *'
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action: check / add_account / remove_account'
+        required: false
+        default: 'check'
+      account:
+        description: 'TikTok username (for add/remove)'
+        required: false
 
 permissions:
   contents: write
@@ -23,13 +31,21 @@ jobs:
       - name: 安装依赖
         run: pip install requests
 
+      - name: 管理账号
+        if: github.event.inputs.action == 'add_account' || github.event.inputs.action == 'remove_account'
+        run: python scripts/manage_accounts.py
+        env:
+          ACTION: ${{ github.event.inputs.action }}
+          ACCOUNT: ${{ github.event.inputs.account }}
+
       - name: 运行监控脚本
+        if: github.event.inputs.action != 'add_account' && github.event.inputs.action != 'remove_account'
         run: python scripts/check_tiktok.py
 
       - name: 提交并推送数据
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/records.json
+          git add data/records.json data/accounts.json
           git diff --cached --quiet || git commit -m "📊 自动更新：$(date +'%Y-%m-%d %H:%M') UTC"
           git push

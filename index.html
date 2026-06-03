@@ -1,263 +1,260 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TikTok 每日账号监控</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #f5f5f7;
-      --surface: #ffffff;
-      --border: #e4e4e9;
-      --accent: #fe2c55;
-      --accent2: #0a8aff;
-      --text: #111118;
-      --muted: #8888a0;
-      --card: #ffffff;
-      --green: #00b87a;
-      --yellow: #f59e0b;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans SC', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-    }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
-    header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 40px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 28px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.06);
-    }
-    .logo { display: flex; align-items: center; gap: 10px; }
-    .logo-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--accent), #ff6b8a);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-    h1 {
-      font-family: 'Space Mono', monospace;
-      font-size: clamp(16px, 2.5vw, 22px);
-      font-weight: 700;
-      color: var(--text);
-    }
-    .header-meta {
-      margin-left: auto;
-      text-align: right;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.9;
-    }
-    .status-dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      margin-right: 5px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TikTok 账号监控</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f5f7;--surface:#fff;--border:#e4e4e9;--accent:#fe2c55;--accent2:#0a8aff;--text:#111118;--muted:#8888a0;--green:#00b87a;--yellow:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;font-weight:300;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 20px 80px}
+header{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 24px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.05);flex-wrap:wrap;gap:12px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#ff6b8a);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+h1{font-family:'Space Mono',monospace;font-size:18px;font-weight:700}
+.header-meta{margin-left:auto;text-align:right;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:5px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 700px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 22px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.05);
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
-    .stat-card.red::before { background: var(--accent); }
-    .stat-card.blue::before { background: var(--accent2); }
-    .stat-card.green::before { background: var(--green); }
-    .stat-card.yellow::before { background: var(--yellow); }
-    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-    .stat-value { font-family: 'Space Mono', monospace; font-size: 30px; font-weight: 700; color: var(--text); }
-    .stat-value.red { color: var(--accent); }
-    .stat-value.blue { color: var(--accent2); }
-    .stat-value.green { color: var(--green); }
+/* Add account bar */
+.add-bar{display:flex;gap:8px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.04);align-items:center;flex-wrap:wrap}
+.add-bar-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.add-bar input{flex:1;min-width:160px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);outline:none}
+.add-bar input:focus{border-color:var(--accent2)}
+.btn{padding:8px 16px;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Noto Sans SC',sans-serif;white-space:nowrap}
+.btn-add{background:var(--accent2);color:#fff}.btn-add:hover{opacity:.85}
+.btn-del{background:#fff0f2;color:var(--accent);border:1px solid #ffd0d8}.btn-del:hover{background:var(--accent);color:#fff}
 
-    .section-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.stat.red::before{background:var(--accent)}.stat.blue::before{background:var(--accent2)}.stat.green::before{background:var(--green)}.stat.yellow::before{background:var(--yellow)}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.stat-value{font-family:'Space Mono',monospace;font-size:26px;font-weight:700}
+.stat.red .stat-value{color:var(--accent)}.stat.blue .stat-value{color:var(--accent2)}.stat.green .stat-value{color:var(--green)}
 
-    .table-wrap {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 28px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.05);
-    }
-    table { width: 100%; border-collapse: collapse; }
-    thead th {
-      padding: 13px 18px;
-      text-align: left;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: #fafafa;
-      border-bottom: 1px solid var(--border);
-    }
-    tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: #f9f9fc; }
-    tbody td { padding: 13px 18px; font-size: 13px; vertical-align: middle; }
-    .time-cell { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
-    .account-cell { font-weight: 600; color: var(--accent2); }
-    .account-cell a { color: inherit; text-decoration: none; }
-    .account-cell a:hover { text-decoration: underline; }
-    .count-cell { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px; }
-    .count-cell.new { color: var(--accent); }
-    .count-cell.zero { color: var(--muted); }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-family: 'Space Mono', monospace; }
-    .badge.ok { background: #e6faf3; color: var(--green); border: 1px solid #b3ead6; }
-    .badge.none { background: #f3f3f7; color: var(--muted); border: 1px solid var(--border); }
-    .badge.err { background: #fff0f2; color: var(--accent); border: 1px solid #ffd0d8; }
-    .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
-    .empty-state .emoji { font-size: 40px; margin-bottom: 12px; }
-    .empty-state p { font-size: 13px; line-height: 1.8; }
-    footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .loading { text-align: center; padding: 40px; color: var(--muted); font-family: 'Space Mono', monospace; font-size: 12px; }
-  </style>
+/* Weekly summary */
+.weekly{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.weekly-title{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.weekly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.weekly-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.weekly-card .name{font-size:12px;font-weight:600;color:var(--accent2);margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.weekly-card .count{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)}
+.weekly-card .label{font-size:10px;color:var(--muted);margin-top:2px}
+
+.section-title{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.panel{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:12px 16px;text-align:left;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);background:#fafafa;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f9f9fc}
+tbody td{padding:11px 16px;font-size:13px;vertical-align:middle}
+.time-cell{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+.acc-cell{font-weight:600;color:var(--accent2)}
+.acc-cell a{color:inherit;text-decoration:none}
+.acc-cell a:hover{text-decoration:underline}
+.num-cell{font-family:'Space Mono',monospace;font-weight:700;font-size:14px}
+.num-cell.new{color:var(--accent)}.num-cell.zero{color:var(--muted)}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-family:'Space Mono',monospace}
+.badge.ok{background:#e6faf3;color:var(--green);border:1px solid #b3ead6}
+.badge.err{background:#fff0f2;color:var(--accent);border:1px solid #ffd0d8}
+.badge.unk{background:#f3f3f7;color:var(--muted);border:1px solid var(--border)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="logo">
-      <div class="logo-icon">♪</div>
-      <h1>TikTok Monitor</h1>
-    </div>
-    <div class="header-meta">
-      <div><span class="status-dot"></span>AUTO DAILY CHECK</div>
-      <div id="last-check">最近检查：加载中…</div>
-      <div>每天 09:00 (北京时间) 更新</div>
-    </div>
-  </header>
 
-  <div class="stats-row">
-    <div class="stat-card red">
-      <div class="stat-label">今日新视频</div>
-      <div class="stat-value red" id="stat-today">—</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">监控账号</div>
-      <div class="stat-value blue" id="stat-accounts">—</div>
-    </div>
-    <div class="stat-card green">
-      <div class="stat-label">累计新视频</div>
-      <div class="stat-value green" id="stat-total">—</div>
-    </div>
-    <div class="stat-card yellow">
-      <div class="stat-label">检查次数</div>
-      <div class="stat-value" id="stat-runs">—</div>
-    </div>
+<header>
+  <div class="logo">
+    <div class="logo-icon">♪</div>
+    <h1>TikTok Monitor</h1>
   </div>
-
-  <div class="section-title">最新检查记录</div>
-  <div class="table-wrap" id="latest-wrap">
-    <div class="loading">Loading…</div>
+  <div class="header-meta">
+    <div><span class="dot"></span>AUTO DAILY CHECK</div>
+    <div id="last-check">加载中…</div>
+    <div>每天 09:00 (北京时间) 自动更新</div>
   </div>
+</header>
 
-  <div class="section-title">历史记录（全部）</div>
-  <div class="table-wrap" id="history-wrap">
-    <div class="loading">Loading…</div>
-  </div>
-
-  <footer>
-    <span>shangxin913.github.io · TikTok Monitor</span>
-    <span id="footer-time"></span>
-  </footer>
+<!-- 添加账号 -->
+<div class="add-bar">
+  <span class="add-bar-label">添加账号</span>
+  <input id="new-acc" type="text" placeholder="输入 TikTok 用户名（不含 @）" />
+  <button class="btn btn-add" onclick="addAccount()">＋ 添加</button>
+  <span class="add-bar-label" style="margin-left:8px">删除账号</span>
+  <input id="del-acc" type="text" placeholder="输入要删除的用户名" />
+  <button class="btn btn-del" onclick="removeAccount()">－ 删除</button>
 </div>
 
+<!-- Stats -->
+<div class="stats">
+  <div class="stat red"><div class="stat-label">今日新视频</div><div class="stat-value" id="s-today">—</div></div>
+  <div class="stat blue"><div class="stat-label">监控账号</div><div class="stat-value" id="s-accounts">—</div></div>
+  <div class="stat green"><div class="stat-label">累计新视频</div><div class="stat-value" id="s-total">—</div></div>
+  <div class="stat yellow"><div class="stat-label">检查次数</div><div class="stat-value" id="s-runs">—</div></div>
+</div>
+
+<!-- 本周汇总 -->
+<div class="weekly">
+  <div class="weekly-title">本周各账号新视频汇总</div>
+  <div class="weekly-grid" id="weekly-grid"><div style="color:var(--muted);font-size:13px">加载中…</div></div>
+</div>
+
+<!-- 今日记录 -->
+<div class="section-title">今日检查记录</div>
+<div class="panel" id="today-panel"><div class="empty-state">加载中…</div></div>
+
+<!-- 历史记录 -->
+<div class="section-title">历史记录</div>
+<div class="panel" id="history-panel"><div class="empty-state">加载中…</div></div>
+
+<footer>
+  <span>shangxin913.github.io · TikTok Monitor</span>
+  <span id="footer-time"></span>
+</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-async function load() {
-  let data;
-  try {
-    const r = await fetch('data/records.json?_=' + Date.now());
-    data = await r.json();
-  } catch(e) {
-    data = { accounts: [], records: [], summary: { total_new_videos: 0, total_runs: 0 } };
-  }
-  const records = data.records || [];
-  const accounts = data.accounts || [];
-  const summary = data.summary || {};
-  const today = records.filter(r => r.date === records[0]?.date);
-  const todayNew = today.reduce((s, r) => s + (r.new_videos || 0), 0);
-  document.getElementById('stat-today').textContent = todayNew;
-  document.getElementById('stat-accounts').textContent = accounts.length;
-  document.getElementById('stat-total').textContent = summary.total_new_videos ?? 0;
-  document.getElementById('stat-runs').textContent = summary.total_runs ?? 0;
-  document.getElementById('last-check').textContent = '最近检查：' + (records[0]?.checked_at ?? '暂无');
+const OWNER = 'shangxin913';
+const REPO = 'shangxin913.github.io';
+const TOKEN_KEY = 'gh_monitor_token';
 
-  function renderTable(rows) {
-    if (!rows.length) {
-      return `<div class="empty-state"><div class="emoji">📭</div><p>暂无记录<br>GitHub Actions 运行后数据将出现在这里</p></div>`;
-    }
-    return `<table>
-      <thead><tr>
-        <th>检查时间</th><th>账号</th><th>新视频</th><th>总视频数</th><th>状态</th>
-      </tr></thead>
-      <tbody>
-      ${rows.map(r => `<tr>
-        <td class="time-cell">${r.checked_at ?? r.date}</td>
-        <td class="account-cell"><a href="https://www.tiktok.com/@${r.account}" target="_blank">@${r.account}</a></td>
-        <td class="count-cell ${r.new_videos > 0 ? 'new' : 'zero'}">+${r.new_videos ?? 0}</td>
-        <td class="count-cell">${r.total_videos ?? '—'}</td>
-        <td><span class="badge ${r.status === 'ok' ? 'ok' : r.status === 'error' ? 'err' : 'none'}">${r.status ?? 'ok'}</span></td>
-      </tr>`).join('')}
-      </tbody>
-    </table>`;
-  }
-
-  document.getElementById('latest-wrap').innerHTML = renderTable(today);
-  document.getElementById('history-wrap').innerHTML = renderTable([...records].reverse().slice(0, 200));
-  document.getElementById('footer-time').textContent = '页面加载于 ' + new Date().toLocaleString('zh-CN');
+function showToast(msg, duration=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),duration);
 }
-load();
+
+function getToken(){
+  let t = localStorage.getItem(TOKEN_KEY);
+  if(!t){
+    t = prompt('请输入 GitHub Token（仅用于添加/删除账号，保存在本地）：');
+    if(t) localStorage.setItem(TOKEN_KEY, t.trim());
+  }
+  return t;
+}
+
+function renderTable(rows){
+  if(!rows.length) return '<div class="empty-state">暂无数据</div>';
+  return `<table><thead><tr><th>检查时间</th><th>账号</th><th>新视频</th><th>总视频数</th><th>状态</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr>
+    <td class="time-cell">${r.checked_at||r.date}</td>
+    <td class="acc-cell"><a href="https://www.tiktok.com/@${r.account}" target="_blank">@${r.account}</a></td>
+    <td class="num-cell ${r.new_videos>0?'new':'zero'}">+${r.new_videos??0}</td>
+    <td class="num-cell">${r.total_videos??'—'}</td>
+    <td><span class="badge ${r.status==='ok'?'ok':r.status==='error'?'err':'unk'}">${r.status||'ok'}</span></td>
+  </tr>`).join('')}
+  </tbody></table>`;
+}
+
+function buildWeekly(records){
+  const now = new Date();
+  const weekAgo = new Date(now - 7*24*3600*1000);
+  const weekStr = weekAgo.toISOString().slice(0,10);
+  const map = {};
+  for(const r of records){
+    if(r.date >= weekStr && r.new_videos > 0){
+      map[r.account] = (map[r.account]||0) + r.new_videos;
+    }
+  }
+  return map;
+}
+
+async function loadData(){
+  try{
+    const r = await fetch('data/records.json?_='+Date.now());
+    const db = await r.json();
+    const records = db.records||[];
+    const accounts = db.accounts||[];
+    const summary = db.summary||{};
+
+    const today = records.filter(r=>r.date===records[0]?.date);
+    const todayNew = today.reduce((s,r)=>s+(r.new_videos||0),0);
+    document.getElementById('s-today').textContent = todayNew;
+    document.getElementById('s-accounts').textContent = accounts.length;
+    document.getElementById('s-total').textContent = summary.total_new_videos??0;
+    document.getElementById('s-runs').textContent = summary.total_runs??0;
+    document.getElementById('last-check').textContent = '最近检查：'+(records[0]?.checked_at||'暂无');
+
+    // Weekly
+    const weekly = buildWeekly(records);
+    const wg = document.getElementById('weekly-grid');
+    if(Object.keys(weekly).length===0){
+      wg.innerHTML='<div style="color:var(--muted);font-size:13px">本周暂无新视频数据</div>';
+    } else {
+      wg.innerHTML = accounts.map(a=>`
+        <div class="weekly-card">
+          <div class="name">@${a}</div>
+          <div class="count">${weekly[a]||0}</div>
+          <div class="label">本周新视频</div>
+        </div>`).join('');
+    }
+
+    document.getElementById('today-panel').innerHTML = renderTable(today);
+    document.getElementById('history-panel').innerHTML = renderTable(records.slice(0,300));
+  }catch(e){
+    showToast('加载数据失败');
+  }
+  document.getElementById('footer-time').textContent = '加载于 '+new Date().toLocaleString('zh-CN');
+}
+
+async function triggerWorkflow(inputs){
+  const token = getToken();
+  if(!token) return showToast('❌ 需要 GitHub Token 才能操作');
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/daily_check.yml/dispatches`,{
+    method:'POST',
+    headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
+    body: JSON.stringify({ref:'main', inputs})
+  });
+  return res.status === 204;
+}
+
+async function addAccount(){
+  const input = document.getElementById('new-acc');
+  const username = input.value.trim().replace(/^@/,'');
+  if(!username) return showToast('请输入账号名');
+  showToast('⏳ 正在提交…');
+  const ok = await triggerWorkflow({action:'add_account', account: username});
+  if(ok){
+    input.value='';
+    showToast('✅ 已提交！GitHub Actions 将在1分钟内添加 @'+username+'，之后刷新页面即可看到', 4000);
+  } else {
+    showToast('❌ 提交失败，请检查 Token 是否有效');
+  }
+}
+
+async function removeAccount(){
+  const input = document.getElementById('del-acc');
+  const username = input.value.trim().replace(/^@/,'');
+  if(!username) return showToast('请输入要删除的账号名');
+  if(!confirm('确定删除 @'+username+' ？')) return;
+  showToast('⏳ 正在提交…');
+  const ok = await triggerWorkflow({action:'remove_account', account: username});
+  if(ok){
+    input.value='';
+    showToast('✅ 已提交！GitHub Actions 将在1分钟内删除 @'+username, 4000);
+  } else {
+    showToast('❌ 提交失败，请检查 Token 是否有效');
+  }
+}
+
+document.getElementById('new-acc').addEventListener('keydown',e=>{if(e.key==='Enter')addAccount()});
+document.getElementById('del-acc').addEventListener('keydown',e=>{if(e.key==='Enter')removeAccount()});
+
+loadData();
 </script>
 </body>
 </html>

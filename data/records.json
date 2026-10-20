@@ -17,6 +17,146 @@
   ],
   "records": [
     {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "jsdxfagcy3",
+      "new_videos": 265,
+      "total_videos": 983,
+      "prev_videos": 718,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "flashlevel.sal",
+      "new_videos": 158,
+      "total_videos": 239,
+      "prev_videos": 81,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "practcaltools",
+      "new_videos": 158,
+      "total_videos": 206,
+      "prev_videos": 48,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "tool.house7",
+      "new_videos": 126,
+      "total_videos": 146,
+      "prev_videos": 20,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "pokdicy2",
+      "new_videos": 138,
+      "total_videos": 229,
+      "prev_videos": 91,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "harvetqho8c",
+      "new_videos": 159,
+      "total_videos": 188,
+      "prev_videos": 29,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "janievkwier",
+      "new_videos": 151,
+      "total_videos": 189,
+      "prev_videos": 38,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "lenny0._",
+      "new_videos": 203,
+      "total_videos": 231,
+      "prev_videos": 28,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "duracore_store",
+      "new_videos": 8,
+      "total_videos": 18,
+      "prev_videos": 10,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "berlas.shop",
+      "new_videos": 27,
+      "total_videos": 68,
+      "prev_videos": 41,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "goldendragonsuppl",
+      "new_videos": 0,
+      "total_videos": null,
+      "prev_videos": 1,
+      "status": "unknown",
+      "error_msg": "cannot parse"
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "swiftmx_store",
+      "new_videos": 0,
+      "total_videos": null,
+      "prev_videos": 676,
+      "status": "unknown",
+      "error_msg": "cannot parse"
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "oino8o8",
+      "new_videos": 4,
+      "total_videos": 247,
+      "prev_videos": 243,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
+      "date": "2026-10-20",
+      "checked_at": "2026-10-20 13:27",
+      "account": "toolriot",
+      "new_videos": 6,
+      "total_videos": 208,
+      "prev_videos": 202,
+      "status": "ok",
+      "error_msg": ""
+    },
+    {
       "date": "2026-10-19",
       "checked_at": "2026-10-19 13:25",
       "account": "jsdxfagcy3",
@@ -19875,151 +20015,11 @@
       "prev_videos": 676,
       "status": "ok",
       "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 10:11",
-      "account": "oino8o8",
-      "new_videos": 0,
-      "total_videos": 243,
-      "prev_videos": 243,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 10:11",
-      "account": "toolriot",
-      "new_videos": 0,
-      "total_videos": 202,
-      "prev_videos": 202,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "jsdxfagcy3",
-      "new_videos": 9,
-      "total_videos": 718,
-      "prev_videos": 709,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "flashlevel.sal",
-      "new_videos": 1,
-      "total_videos": 81,
-      "prev_videos": 80,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "practcaltools",
-      "new_videos": 1,
-      "total_videos": 48,
-      "prev_videos": 47,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "tool.house7",
-      "new_videos": 4,
-      "total_videos": 20,
-      "prev_videos": 16,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "pokdicy2",
-      "new_videos": 1,
-      "total_videos": 91,
-      "prev_videos": 90,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "harvetqho8c",
-      "new_videos": 2,
-      "total_videos": 29,
-      "prev_videos": 27,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "janievkwier",
-      "new_videos": 1,
-      "total_videos": 38,
-      "prev_videos": 37,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "lenny0._",
-      "new_videos": 2,
-      "total_videos": 28,
-      "prev_videos": 26,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "duracore_store",
-      "new_videos": 3,
-      "total_videos": 10,
-      "prev_videos": 7,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "berlas.shop",
-      "new_videos": 4,
-      "total_videos": 41,
-      "prev_videos": 37,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "goldendragonsuppl",
-      "new_videos": 0,
-      "total_videos": 1,
-      "prev_videos": null,
-      "status": "ok",
-      "error_msg": ""
-    },
-    {
-      "date": "2026-06-03",
-      "checked_at": "2026-06-03 09:26",
-      "account": "swiftmx_store",
-      "new_videos": 0,
-      "total_videos": 676,
-      "prev_videos": null,
-      "status": "ok",
-      "error_msg": ""
     }
   ],
   "summary": {
-    "total_new_videos": 98499,
-    "total_runs": 145,
-    "last_run": "2026-10-19 13:25"
+    "total_new_videos": 99902,
+    "total_runs": 146,
+    "last_run": "2026-10-20 13:27"
   }
 }
